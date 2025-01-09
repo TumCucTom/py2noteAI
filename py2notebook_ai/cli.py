@@ -13,8 +13,14 @@ def convert_command(args):
     script = parse_script(args.script)
     code_blocks = [ast.unparse(node) for node in script.body if isinstance(node, ast.stmt)]
 
-    # Generate comments for each code block
-    comments = [generate_comment(block, api_key) for block in code_blocks]
+    comments = []
+    for block in code_blocks:
+        try:
+            comment = generate_comment(block, api_key)
+            comments.append(comment)
+        except Exception as e:
+            print(f"Error generating comment for block: {e}")
+            comments.append("Error generating comment.")
 
     # Create and save the notebook
     notebook = create_notebook(code_blocks, comments)

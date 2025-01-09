@@ -37,15 +37,39 @@ def generate_comment(code_block, api_key):
             ]
         )
         return response["choices"][0]["message"]["content"].strip()
-    except openai.error.OpenAIError as e:
+    except Exception as e:
         print(f"Error generating comment: {e}")
         return "Error generating comment."
 
-def create_notebook(blocks, comments):
+def generate_title_and_description(script, api_key):
+    openai.api_key = api_key
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are an expert Python programmer who can generate titles and descriptions for scripts."},
+                {"role": "user", "content": f"Generate a title and a description for the following Python script:\n{script}"}
+            ]
+        )
+        title = response["choices"][0]["message"]["content"].strip().split("\n", 1)[0]  # Get the first line as title
+        description = response["choices"][0]["message"]["content"].strip().split("\n", 1)[1]  # Get the rest as description
+        return title, description
+    except Exception as e:
+        print(f"Error generating title and description: {e}")
+        return "Error generating title", "Error generating description."
+
+def create_notebook(title, description, blocks, comments):
     notebook = nbformat.v4.new_notebook()
+
+    # Add the title and description as markdown cells at the top
+    notebook.cells.append(nbformat.v4.new_markdown_cell(f"# {title}"))
+    notebook.cells.append(nbformat.v4.new_markdown_cell(description))
+
+    # Add the code blocks and comments
     for code, comment in zip(blocks, comments):
         notebook.cells.append(nbformat.v4.new_markdown_cell(comment))
         notebook.cells.append(nbformat.v4.new_code_cell(code))
+
     return notebook
 
 def save_notebook(notebook, output_path):
@@ -84,6 +108,13 @@ def main():
         code_blocks = [ast.unparse(node) for node in script.body if isinstance(node, ast.stmt)]
         comments = [generate_comment(block, api_key) for block in code_blocks]
 
-        notebook = create_notebook(code_blocks, comments)
+        # Generate title and description for the notebook
+        with open(args.script, 'r') as file:
+            script_content = file.read()
+        title, description = generate_title_and_description(script_content, api_key)
+
+        # Create the notebook with title, description, and code blocks
+        notebook = create_notebook(title, description, code_blocks, comments)
         save_notebook(notebook, args.output)
         print(f"Notebook saved to {args.output}")
+
