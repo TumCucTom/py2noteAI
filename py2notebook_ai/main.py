@@ -26,16 +26,21 @@ def parse_script(file_path):
     with open(file_path, 'r') as f:
         return ast.parse(f.read())
 
-def generate_comment(code, api_key):
+def generate_comment(code_block, api_key):
     openai.api_key = api_key
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "Explain this Python code."},
-            {"role": "user", "content": code},
-        ],
-    )
-    return response["choices"][0]["message"]["content"]
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are an expert Python programmer who comments on code."},
+                {"role": "user", "content": f"Comment on this Python code:\n{code_block}"}
+            ]
+        )
+        # Extract the AI's reply from the response
+        return response["choices"][0]["message"]["content"]
+    except Exception as e:
+        print(f"Error generating comment: {e}")
+        return ""
 
 def create_notebook(blocks, comments):
     notebook = nbformat.v4.new_notebook()

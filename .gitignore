@@ -1,3 +1,5 @@
 .idea
 .DS_Store
 env
+tests/tester.py
+tests/tester.ipynb
