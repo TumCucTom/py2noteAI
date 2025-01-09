@@ -1,6 +1,33 @@
+Metadata-Version: 2.2
+Name: py2notebook-ai
+Version: 0.1.0
+Summary: A Python library to convert scripts into Jupyter Notebooks with AI-generated comments.
+Home-page: https://github.com/TumCucTom/py2notebook-ai
+Author: Thomas Bale
+Author-email: tokbale@outlook.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: openai
+Requires-Dist: nbformat
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
 # Py2Notebook AI
 
-[Py2Notebook AI](https://pypi.org/project/py2notebook-ai/0.1.0/) is a Python library that transforms Python scripts into Jupyter Notebooks. The tool leverages AI to generate insightful comments for each code block, helping to document and explain the code effectively.
+Py2Notebook AI is a Python library that transforms Python scripts into Jupyter Notebooks. The tool leverages AI to generate insightful comments for each code block, helping to document and explain the code effectively.
 
 ## Features
 - Converts Python scripts into Jupyter Notebook format.

@@ -1,0 +1,2 @@
+[console_scripts]
+py2notebook-ai = py2notebook_ai.main:main
