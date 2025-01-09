@@ -3,3 +3,4 @@
 env
 tests/tester.py
 tests/tester.ipynb
+tests/.ipynb_checkpoints

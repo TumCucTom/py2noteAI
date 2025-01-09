@@ -36,11 +36,10 @@ def generate_comment(code_block, api_key):
                 {"role": "user", "content": f"Comment on this Python code:\n{code_block}"}
             ]
         )
-        # Extract the AI's reply from the response
-        return response["choices"][0]["message"]["content"]
-    except Exception as e:
+        return response["choices"][0]["message"]["content"].strip()
+    except openai.error.OpenAIError as e:
         print(f"Error generating comment: {e}")
-        return ""
+        return "Error generating comment."
 
 def create_notebook(blocks, comments):
     notebook = nbformat.v4.new_notebook()
