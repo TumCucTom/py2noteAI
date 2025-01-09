@@ -12,3 +12,4 @@ py2notebook_ai.egg-info/entry_points.txt
 py2notebook_ai.egg-info/requires.txt
 py2notebook_ai.egg-info/top_level.txt
 tests/test_main.py
+tests/tester.py
