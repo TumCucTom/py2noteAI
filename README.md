@@ -6,7 +6,8 @@ Py2Notebook AI is a Python library that transforms Python scripts into Jupyter N
 - Converts Python scripts into Jupyter Notebook format.
 - AI-generated comments for code blocks to improve understanding.
 - Easy-to-use command-line interface.
-- Supports customization for code block explanations.
+- Supports saving and managing OpenAI API keys.
+- Allows overriding the saved API key for specific runs.
 
 ## Installation
 Install Py2Notebook AI via pip:
@@ -15,9 +16,21 @@ pip install py2notebook-ai
 ```
 
 ## Usage
+### 1. Configure OpenAI API Key
+Before converting scripts, set your OpenAI API key using the following command:
+```bash
+py2notebook-ai config set-key YOUR_OPENAI_API_KEY
+```
+This will save your API key locally in a hidden configuration file.
+
+### 2. Convert Python Script to Notebook
 To convert a Python script to a Jupyter Notebook with AI-generated comments:
 ```bash
 py2notebook-ai convert your_script.py -o output_notebook.ipynb
+```
+If you want to override the saved API key for a specific run:
+```bash
+py2notebook-ai convert your_script.py -o output_notebook.ipynb --api-key YOUR_API_KEY
 ```
 
 ### Example
@@ -38,5 +51,5 @@ Output: `output_notebook.ipynb`
 Contributions are welcome! Feel free to open issues or submit pull requests to enhance the functionality or fix bugs.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
