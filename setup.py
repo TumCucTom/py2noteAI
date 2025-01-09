@@ -17,7 +17,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "py2notebook-ai=py2notebook_ai.main:main",
+            "py2notebook-ai=py2notebook_ai.cli:main",
         ],
     },
     classifiers=[
