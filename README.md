@@ -2,6 +2,8 @@
 
 [Py2Notebook AI](https://pypi.org/project/py2notebook-ai/0.1.0/) is a Python library that transforms Python scripts into Jupyter Notebooks. The tool leverages AI to generate insightful comments for each code block, helping to document and explain the code effectively.
 
+Paritculary useful for time constrained hackathons!
+
 ## Features
 - Converts Python scripts into Jupyter Notebook format.
 - AI-generated comments for code blocks to improve understanding.
